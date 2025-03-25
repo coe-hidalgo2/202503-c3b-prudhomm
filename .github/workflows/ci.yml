@@ -129,3 +129,7 @@ jobs:
           # Push the SIF file to the GitHub Container Registry.
           sif=$( basename ${{ github.repository }}.sif )
           ${{ env.apptainer }} push $sif oras://ghcr.io/${{ needs.build-docker.outputs.tags }}-sif
+
+      - name: Deploy
+        run: |
+          gh workflow -R coe-hidalgo2/202503-c3b-prudhomm run deploy.yml -r main -f image=${{ needs.build-docker.outputs.tags }}-sif
