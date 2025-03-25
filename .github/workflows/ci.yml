@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         runs-on: [self-ubuntu-24.04, karolina]
+        nps: [1,2,4]
 
     runs-on: ${{ matrix.runs-on }}
     steps:
@@ -32,7 +33,7 @@ jobs:
                module load Boost/1.83.0-GCC-13.2.0 Ninja/1.12.1-GCCcore-13.3.0 OpenMPI/4.1.6-GCC-13.2.0
           fi
           cmake --build --preset default
-          # mpirun -np ${{ matrix.nps }} build/default/myapp/myapp
+          mpirun -np ${{ matrix.nps }} build/default/myapp/myapp
 
       - name: Run Tests
         run: |
