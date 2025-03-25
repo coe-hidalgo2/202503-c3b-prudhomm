@@ -1,5 +1,5 @@
 name: Deploy
-run-name: Deploy ${{ inputs.image}}
+run-name: Deploy ${{ inputs.image#coe-hidalgo2/ }}
 on:
   workflow_dispatch:
     inputs:
