@@ -7,6 +7,10 @@ on:
         description: 'Image to deploy'
         required: true
         default: 'ghcr.io/coe-hidalgo2/202503-c3b-prudhomm:main-sif'
+      np: 
+        description: 'Number of processes'
+        required: true
+        default: 4
 jobs:
   deploy:
     strategy:
@@ -49,4 +53,4 @@ jobs:
       - name: Run Container on Karolina
         if: matrix.runs-on == 'karolina'
         run: |
-          bash job_monitor.sh $SIF_FILENAME
+          bash job_monitor.sh $SIF_FILENAME ${{ inputs.np }}
