@@ -2,7 +2,11 @@ name: Deploy
 
 on:
   workflow_dispatch:
-
+    inputs:
+      image:
+        description: 'Image to deploy'
+        required: true
+        default: 'ghcr.io/coe-hidalgo2/202503-c3b-prudhomm:main-sif'
 jobs:
   deploy:
     strategy:
@@ -32,7 +36,7 @@ jobs:
       - name: PULL Apptainer SIF
         run: |
           # Pull the SIF file from GHCR
-          $APPTAINER_CMD pull -F $SIF_FILENAME oras://ghcr.io/${{ github.repository }}:2.0-sif
+          $APPTAINER_CMD pull -F $SIF_FILENAME oras://${{ inputs.tag }}-sif
           # inspect the SIF file
           $APPTAINER_CMD inspect $SIF_FILENAME
 
